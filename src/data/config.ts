@@ -1,14 +1,10 @@
 import type { SiteConfig } from './types'
 
 /**
- * Single configurable root URL for canonical links, OpenGraph tags, sitemap.xml, robots.txt, and JSON-LD.
- * Update this constant before deploying to your final custom domain.
- */
-/**
  * Primary production site URL for canonical links, sitemaps, robots.txt, and Open Graph metadata.
  * Everything in the build pipeline, SEO meta tags, and structured data reads from this constant.
  */
-export const SITE_URL = 'https://[YOUR VERCEL OR REAL DOMAIN URL]'
+export const SITE_URL = 'https://chiragportfolio-mu.vercel.app'
 
 export const siteConfig: SiteConfig = {
   name: 'Chirag H M',

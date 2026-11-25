@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /play
 
-Sitemap: https://[YOUR VERCEL OR REAL DOMAIN URL]/sitemap.xml
+Sitemap: https://chiragportfolio-mu.vercel.app/sitemap.xml

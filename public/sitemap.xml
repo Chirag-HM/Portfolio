@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://[YOUR VERCEL OR REAL DOMAIN URL]/</loc>
+    <loc>https://chiragportfolio-mu.vercel.app/</loc>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://[YOUR VERCEL OR REAL DOMAIN URL]/projects/ai-smart-vision</loc>
+    <loc>https://chiragportfolio-mu.vercel.app/projects/ai-smart-vision</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://[YOUR VERCEL OR REAL DOMAIN URL]/projects/campus-placement-portal</loc>
+    <loc>https://chiragportfolio-mu.vercel.app/projects/campus-placement-portal</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://[YOUR VERCEL OR REAL DOMAIN URL]/projects/dsa-solver-extension</loc>
+    <loc>https://chiragportfolio-mu.vercel.app/projects/dsa-solver-extension</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://[YOUR VERCEL OR REAL DOMAIN URL]/projects/study-tools-automation</loc>
+    <loc>https://chiragportfolio-mu.vercel.app/projects/study-tools-automation</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
