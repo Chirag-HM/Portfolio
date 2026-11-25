@@ -21,34 +21,21 @@ export function isReducedGpuTier(): boolean {
   const nav = navigator as Navigator & { deviceMemory?: number }
   const lowCores =
     typeof navigator.hardwareConcurrency === 'number' &&
-    navigator.hardwareConcurrency <= 4
-  const lowMemory = typeof nav.deviceMemory === 'number' && nav.deviceMemory <= 4
+    navigator.hardwareConcurrency <= 2
+  const lowMemory = typeof nav.deviceMemory === 'number' && nav.deviceMemory <= 2
   return lowCores || lowMemory
 }
 
 /**
- * Low-end / touch-primary / narrow-viewport heuristic used by <SceneSlot>
- * to decide whether an optional lazy 3D scene may mount.
+ * Checks whether WebGL is supported on this browser.
+ * As long as WebGL is available, the device can render 3D scenes in immersive mode.
  */
-export function isLowEndDevice(): boolean {
-  if (typeof window === 'undefined' || typeof navigator === 'undefined') return false
-
-  const coarsePointer = window.matchMedia('(pointer: coarse)').matches
-  const hasFinePointer = window.matchMedia('(pointer: fine)').matches
-  const isTouchOnly =
-    coarsePointer ||
-    (!hasFinePointer && ('ontouchstart' in window || navigator.maxTouchPoints > 0))
-  const narrowViewport = window.innerWidth < 1024
-
-  return isReducedGpuTier() || isTouchOnly || narrowViewport
-}
-
 export function useDeviceSceneEligibility(): boolean {
-  const [eligible, setEligible] = useState(() => isWebGLAvailable() && !isLowEndDevice())
+  const [eligible, setEligible] = useState(() => isWebGLAvailable())
 
   useEffect(() => {
     const update = () => {
-      setEligible(isWebGLAvailable() && !isLowEndDevice())
+      setEligible(isWebGLAvailable())
     }
     window.addEventListener('resize', update, { passive: true })
     return () => window.removeEventListener('resize', update)

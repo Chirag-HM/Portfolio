@@ -16,6 +16,7 @@ import { SceneErrorBoundary } from './SceneErrorBoundary'
 export interface SceneSlotBaseProps {
   soundEnabled?: boolean
   inView?: boolean
+  prefersReduced?: boolean
   onContextLost?: () => void
 }
 
@@ -151,7 +152,6 @@ export function SceneSlot<TProps extends SceneSlotBaseProps = SceneSlotBaseProps
     Boolean(SceneComponent) &&
     viewMode === 'immersive' &&
     deviceEligible &&
-    !prefersReduced &&
     !hasCrashed
 
   const handleSceneCrash = useCallback(() => {
@@ -213,6 +213,7 @@ export function SceneSlot<TProps extends SceneSlotBaseProps = SceneSlotBaseProps
                 {...({
                   soundEnabled,
                   inView: isActive,
+                  prefersReduced,
                   onContextLost: handleSceneCrash,
                   ...sceneProps,
                 } as TProps)}
