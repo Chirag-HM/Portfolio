@@ -21,9 +21,9 @@ export const siteConfig: SiteConfig = {
 
   // Leave empty until ready — any empty value is hidden automatically from the UI
   email: 'chiraghm06@gmail.com',
-  githubUrl: '',
+  githubUrl: 'https://github.com/Chirag-HM',
   linkedInUrl: '',
-  statusText: '',
+  statusText: 'Available for work',
 
   // Local public/ assets (automatically shown when the file exists in public/, hidden otherwise)
   resumeUrl: '/resume.pdf',

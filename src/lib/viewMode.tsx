@@ -80,7 +80,7 @@ export function ViewModeProvider({ children }: { children: ReactNode }) {
     //    Wait ensures initial load at y=0 (where #stack is >3x viewport below) never fetches 3D chunks.
     if (!bestId) {
       let nearestMarginDist = Infinity
-      const preloadMargin = vh * 0.12
+      const preloadMargin = vh * 0.35
       for (const [chapterId, entry] of slots.entries()) {
         const rect = entry.el.getBoundingClientRect()
         const approachingFromBelow = rect.top > vh && rect.top <= vh + preloadMargin
