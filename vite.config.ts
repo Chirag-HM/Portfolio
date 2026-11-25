@@ -58,22 +58,22 @@ function scanPublicFiles(publicDir: string): string[] {
   return results
 }
 
-function publicAssetsPlugin(): Plugin {
-  const virtualId = 'virtual:public-assets'
-  const resolvedVirtualId = `\0${virtualId}`
+function syncPublicAssetsFile(): void {
   const publicDir = path.resolve(process.cwd(), 'public')
+  const assetsFile = path.resolve(process.cwd(), 'src/lib/publicAssets.ts')
+  const files = scanPublicFiles(publicDir)
+  const content = `/**
+ * Generated list of assets present in public/.
+ * Keeps optional assets (resume, signature, portrait) hiding cleanly when absent.
+ */
+export const publicAssets: Set<string> = new Set(${JSON.stringify(files, null, 2)})
 
-  return {
-    name: 'public-assets-manifest',
-    resolveId(id) {
-      if (id === virtualId) return resolvedVirtualId
-    },
-    load(id) {
-      if (id === resolvedVirtualId) {
-        const files = scanPublicFiles(publicDir)
-        return `export const publicAssets = new Set(${JSON.stringify(files)});\nexport function hasPublicAsset(p) { return publicAssets.has(p); }\n`
-      }
-    },
+export function hasPublicAsset(path: string): boolean {
+  return publicAssets.has(path)
+}
+`
+  if (!fs.existsSync(assetsFile) || fs.readFileSync(assetsFile, 'utf8') !== content) {
+    fs.writeFileSync(assetsFile, content)
   }
 }
 
@@ -98,6 +98,9 @@ function seoSyncPlugin(): Plugin {
 
   return {
     name: 'seo-sync-plugin',
+    configureServer() {
+      syncPublicAssetsFile()
+    },
     transformIndexHtml(html) {
       const meta = readConfigMeta()
       const sameAs = [meta.githubUrl, meta.linkedInUrl].filter(Boolean)
@@ -122,6 +125,7 @@ function seoSyncPlugin(): Plugin {
       return updated
     },
     buildStart() {
+      syncPublicAssetsFile()
       const publicDir = path.resolve(process.cwd(), 'public')
       fs.mkdirSync(publicDir, { recursive: true })
       const meta = readConfigMeta()
@@ -135,7 +139,7 @@ function seoSyncPlugin(): Plugin {
 }
 
 export default defineConfig({
-  plugins: [react(), tailwindcss(), publicAssetsPlugin(), seoSyncPlugin()],
+  plugins: [react(), tailwindcss(), seoSyncPlugin()],
   build: {
     rolldownOptions: {
       output: {

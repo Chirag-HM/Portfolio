@@ -1,4 +1,4 @@
-import { hasPublicAsset } from 'virtual:public-assets'
+import { hasPublicAsset } from './publicAssets'
 
 export function isNonEmpty(value?: string): boolean {
   if (!value) return false
